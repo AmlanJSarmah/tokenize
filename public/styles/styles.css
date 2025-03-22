@@ -41,6 +41,7 @@ button {
   font-size: var(--token-button);
   border: none;
   outline: none;
+  cursor: pointer;
 }
 
 /* NAV Section */
