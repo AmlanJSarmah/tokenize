@@ -38,7 +38,7 @@
   margin-bottom: 0.5rem;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1400px) {
   .form-container {
     width: 80%;
   }
@@ -50,5 +50,11 @@
   }
   .form-container form input {
     margin-bottom: 1rem;
+  }
+}
+
+@media screen and (min-width: 2000px) {
+  .form-container form {
+    width: 50%;
   }
 }

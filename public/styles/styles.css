@@ -44,6 +44,15 @@ button {
   cursor: pointer;
 }
 
+a {
+  color: white;
+  text-decoration: none;
+}
+
+.selected {
+  color: var(--accent-color);
+}
+
 /* NAV Section */
 
 /* LOGO */
@@ -53,6 +62,7 @@ nav h1 {
   font-weight: 400;
   font-style: normal;
   color: white;
+  cursor: pointer;
 }
 
 nav {
