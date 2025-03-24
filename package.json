@@ -1,0 +1,30 @@
+{
+  "name": "tokenize",
+  "version": "1.0.0",
+  "description": "A full stack token generation system",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AmlanJSarmah/Tokenize.git"
+  },
+  "keywords": [
+    "token"
+  ],
+  "author": "A.J.Sarmah",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/AmlanJSarmah/Tokenize/issues"
+  },
+  "homepage": "https://github.com/AmlanJSarmah/Tokenize#readme",
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  },
+  "dependencies": {
+    "body-parser": "^1.20.3",
+    "express": "^4.21.2"
+  }
+}
