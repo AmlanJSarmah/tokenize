@@ -1,12 +1,13 @@
 const express = require("express");
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.render("main_pag.ejs");
-});
+// Controllers
+const tokenController = require("../controllers/token");
 
-router.get("/new", (req, res) => {
-  res.render("new_token.ejs");
-});
+// Routes
+
+router.get("/", tokenController.allTokens);
+
+router.get("/new", tokenController.newToken);
 
 module.exports = router;
