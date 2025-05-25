@@ -14,8 +14,8 @@
     <!-- STYLESHEET -->
     <!-- Global -->
     <link rel="stylesheet" href="/styles/styles.css" />
-    <!-- New Token Page -->
-    <link rel="stylesheet" href="/styles/new_token.css" />
+    <!-- Main Page -->
+    <link rel="stylesheet" href="/styles/main_page_styles.css" />
   </head>
   <body>
     <!-- NAV -->
@@ -24,23 +24,18 @@
         <h1>Your Name Here</h1>
         <ul>
           <li><a href="/">Tokens</a></li>
-          <li><a href="/new" class="selected">New Token</a></li>
+          <li><a href="/new">New Token</a></li>
           <li><a href="">My Token</a></li>
         </ul>
       </div>
     </nav>
-    <!-- NEW TOKEN Section -->
-    <section class="new-token">
-      <div class="form-container">
-        <form action="/new" method="POST">
-          <label for="task">Task</label>
-          <input type="text" name="task" />
-          <label for="from">From</label>
-          <input type="text" name="from" />
-          <label for="to">To</label>
-          <input type="text" name="to" />
-          <button type="submit">Submit</button>
-        </form>
+    <!-- Error -->
+    <section class="main">
+      <div class="token-container">
+        <div class="token-text">
+          <h2>Error</h2>
+          <p>Cannot Find Page :(</p>
+        </div>
       </div>
     </section>
   </body>

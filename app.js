@@ -6,6 +6,9 @@ const path = require("path");
 // Importing routes
 const tokenRoutes = require("./routes/token");
 
+// Controllers
+const errorController = require("./controllers/error");
+
 const app = express();
 
 // Decoding Body
@@ -20,5 +23,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Using Routes
 app.use(tokenRoutes);
+app.use(errorController.errorPage);
 
 app.listen(3000);

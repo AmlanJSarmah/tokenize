@@ -5,3 +5,8 @@ exports.allTokens = (req, res) => {
 exports.newToken = (req, res) => {
   res.render("new_token.ejs");
 };
+
+exports.addNewToken = (req, res) => {
+  console.log(req);
+  res.redirect("/");
+};
