@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tokenize</title>
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Babylonica&family=Poppins:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- STYLESHEET -->
+    <!-- Global -->
+    <link rel="stylesheet" href="/styles/styles.css" />
+    <!-- New Token Page -->
+    <link rel="stylesheet" href="/styles/new_token.css" />
+  </head>
+  <body>
+    <!-- NAV -->
+    <nav class="nav-bar">
+      <div class="nav-container">
+        <ul>
+          <li><a href="/new_account" class="selected">Create Account</a></li>
+          <li><a href="/sign_in">Sign In</a></li>
+        </ul>
+      </div>
+    </nav>
+    <!-- NEW TOKEN Section -->
+    <section class="new-token">
+      <div class="form-container">
+        <form action="/new_account" method="POST">
+          <label for="task">Email</label>
+          <input type="text" name="task" />
+          <label for="from">Password</label>
+          <input type="text" name="from" />
+          <label for="to">Confirm Password</label>
+          <input type="text" name="to" />
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </section>
+  </body>
+</html>

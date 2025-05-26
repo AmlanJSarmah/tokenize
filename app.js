@@ -5,6 +5,7 @@ const path = require("path");
 
 // Importing routes
 const tokenRoutes = require("./routes/token");
+const authRoutes = require("./routes/auth");
 
 // Controllers
 const errorController = require("./controllers/error");
@@ -23,6 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 
 // Using Routes
 app.use(tokenRoutes);
+app.use(authRoutes);
 app.use(errorController.errorPage);
 
 app.listen(3000);
