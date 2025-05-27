@@ -30,16 +30,17 @@
     <!-- NEW TOKEN Section -->
     <section class="new-token">
       <div class="form-container">
-        <form action="/new_account" method="POST">
+        <form action="/new_account" method="POST" id="submitAccountDetails">
           <label for="task">Email</label>
           <input type="text" name="task" />
           <label for="from">Password</label>
-          <input type="text" name="from" />
+          <input type="text" name="from" id="password" />
           <label for="to">Confirm Password</label>
-          <input type="text" name="to" />
+          <input type="text" name="to" id="confirmPassword" />
           <button type="submit">Submit</button>
         </form>
       </div>
     </section>
+    <script src="/js/script.js"></script>
   </body>
 </html>
