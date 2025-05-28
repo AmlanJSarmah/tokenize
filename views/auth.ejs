@@ -23,16 +23,12 @@
       <div class="nav-container">
         <ul>
           <li>
-            <a
-              href="/new_account?signUpMode=true"
-              class="<%= signUpMode == 'true' ? 'selected' : '' %>"
+            <a href="/new_account" class="<%= signUpMode ? 'selected' : '' %>"
               >Create Account</a
             >
           </li>
           <li>
-            <a
-              href="/new_account?signUpMode=false"
-              class="<%= signUpMode == 'false' ? 'selected' : '' %>"
+            <a href="/sign_in" class="<%= !signUpMode ? 'selected' : '' %>"
               >Sign In</a
             >
           </li>
@@ -47,13 +43,13 @@
           <label for="userName">Username</label>
           <input type="text" name="userName" />
           <% } %>
-          <label for="task">Email</label>
-          <input type="text" name="task" />
-          <label for="from">Password</label>
-          <input type="text" name="from" id="password" />
+          <label for="email">Email</label>
+          <input type="text" name="email" />
+          <label for="password">Password</label>
+          <input type="text" name="password" id="password" />
           <% if(signUpMode === "true"){ %>
-          <label for="to">Confirm Password</label>
-          <input type="text" name="to" id="confirmPassword" />
+          <label for="confirmPassword">Confirm Password</label>
+          <input type="text" name="confirmPassword" id="confirmPassword" />
           <% } %>
           <button type="submit">Submit</button>
         </form>

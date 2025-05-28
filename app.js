@@ -2,6 +2,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const path = require("path");
+const mongoose = require("mongoose");
 
 // Importing routes
 const tokenRoutes = require("./routes/token");
@@ -27,4 +28,11 @@ app.use(tokenRoutes);
 app.use(authRoutes);
 app.use(errorController.errorPage);
 
-app.listen(3000);
+mongoose
+  .connect("mongodb://localhost:27017/tokenize")
+  .then(() => {
+    app.listen(3000);
+  })
+  .catch((err) => {
+    console.error(err);
+  });
