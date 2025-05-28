@@ -1,5 +1,5 @@
 exports.allTokens = (req, res) => {
-  res.render("main_page.ejs");
+  res.render("main_page.ejs", { isLoggedIn: false });
 };
 
 exports.newToken = (req, res) => {
@@ -7,7 +7,5 @@ exports.newToken = (req, res) => {
 };
 
 exports.addNewToken = (req, res) => {
-  console.log(req.body);
-  console.log(req.body.from + "\n" + req.body.to + "\n" + req.body?.task);
   res.redirect("/");
 };

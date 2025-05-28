@@ -22,8 +22,20 @@
     <nav class="nav-bar">
       <div class="nav-container">
         <ul>
-          <li><a href="/new_account" class="selected">Create Account</a></li>
-          <li><a href="/sign_in">Sign In</a></li>
+          <li>
+            <a
+              href="/new_account?signUpMode=true"
+              class="<%= signUpMode == 'true' ? 'selected' : '' %>"
+              >Create Account</a
+            >
+          </li>
+          <li>
+            <a
+              href="/new_account?signUpMode=false"
+              class="<%= signUpMode == 'false' ? 'selected' : '' %>"
+              >Sign In</a
+            >
+          </li>
         </ul>
       </div>
     </nav>
@@ -31,16 +43,24 @@
     <section class="new-token">
       <div class="form-container">
         <form action="/new_account" method="POST" id="submitAccountDetails">
+          <% if(signUpMode === "true"){ %>
+          <label for="userName">Username</label>
+          <input type="text" name="userName" />
+          <% } %>
           <label for="task">Email</label>
           <input type="text" name="task" />
           <label for="from">Password</label>
           <input type="text" name="from" id="password" />
+          <% if(signUpMode === "true"){ %>
           <label for="to">Confirm Password</label>
           <input type="text" name="to" id="confirmPassword" />
+          <% } %>
           <button type="submit">Submit</button>
         </form>
       </div>
     </section>
+    <% if(signUpMode == "true") { %>
     <script src="/js/script.js"></script>
+    <% } %>
   </body>
 </html>

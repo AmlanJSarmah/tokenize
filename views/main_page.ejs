@@ -21,10 +21,18 @@
     <!-- NAV -->
     <nav class="nav-bar">
       <div class="nav-container">
+        <% if(isLoggedIn) { %>
         <h1>Your Name Here</h1>
+        <% } else { %>
+        <ul>
+          <li>
+            <a href="/new_account">Sign Up / Log In</a>
+          </li>
+        </ul>
+        <% } %>
         <ul>
           <li><a href="/" class="selected">Tokens</a></li>
-          <li><a href="/new">New Token</a></li>
+          <li><a href="<%= isLoggedIn ? '/new' : '' %>">New Token</a></li>
           <li><a href="">My Token</a></li>
         </ul>
       </div>
