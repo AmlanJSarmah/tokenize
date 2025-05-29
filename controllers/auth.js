@@ -36,7 +36,7 @@ exports.signUp = (req, res) => {
       if (isFound) {
         res.redirect("/sign_in");
       } else {
-        return bcrypt
+        bcrypt
           .hash(req.body.password, configs.SALT)
           .then((hashedPassword) => {
             const user = new User({
