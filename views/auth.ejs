@@ -38,8 +38,12 @@
     <!-- NEW TOKEN Section -->
     <section class="new-token">
       <div class="form-container">
-        <form action="/new_account" method="POST" id="submitAccountDetails">
-          <% if(signUpMode === "true"){ %>
+        <form
+          action="<%= signUpMode ? '/new_account' : '/sign_in' %>"
+          method="POST"
+          id="submitAccountDetails"
+        >
+          <% if(signUpMode){ %>
           <label for="userName">Username</label>
           <input type="text" name="userName" />
           <% } %>
@@ -47,7 +51,7 @@
           <input type="text" name="email" />
           <label for="password">Password</label>
           <input type="text" name="password" id="password" />
-          <% if(signUpMode === "true"){ %>
+          <% if(signUpMode){ %>
           <label for="confirmPassword">Confirm Password</label>
           <input type="text" name="confirmPassword" id="confirmPassword" />
           <% } %>

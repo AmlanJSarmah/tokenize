@@ -1,9 +1,18 @@
 exports.allTokens = (req, res) => {
-  res.render("main_page.ejs", { isLoggedIn: false });
+  res.render("main_page.ejs", {
+    isLoggedIn: req.session.isLoggedIn,
+    userName: req.session.userName,
+  });
 };
 
 exports.newToken = (req, res) => {
-  res.render("new_token.ejs");
+  if (!req.session.isLoggedIn) {
+    res.redirect("/");
+    return;
+  }
+  res.render("new_token.ejs", {
+    userName: req.session.userName,
+  });
 };
 
 exports.addNewToken = (req, res) => {
