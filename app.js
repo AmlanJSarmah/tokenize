@@ -41,6 +41,9 @@ app.use(
 app.use(tokenRoutes);
 app.use(authRoutes);
 app.use(errorController.errorPage);
+app.use((error, req, res, next) => {
+  res.redirect("/500");
+});
 
 mongoose
   .connect("mongodb://localhost:27017/tokenize")

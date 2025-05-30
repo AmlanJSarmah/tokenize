@@ -36,26 +36,24 @@ exports.signUp = (req, res) => {
       if (isFound) {
         res.redirect("/sign_in");
       } else {
-        bcrypt
-          .hash(req.body.password, configs.SALT)
-          .then((hashedPassword) => {
-            const user = new User({
-              name: req.body.userName,
-              email: req.body.email,
-              password: hashedPassword,
-            });
-            return user.save();
-          })
-          .then(() => {
-            res.redirect("/sign_in");
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+        return bcrypt.hash(req.body.password, configs.SALT);
       }
     })
+    .then((hashedPassword) => {
+      const user = new User({
+        name: req.body.userName,
+        email: req.body.email,
+        password: hashedPassword,
+      });
+      return user.save();
+    })
+    .then(() => {
+      res.redirect("/sign_in");
+    })
     .catch((err) => {
-      console.error(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };
 
@@ -64,29 +62,29 @@ exports.logIn = (req, res) => {
     res.redirect("/");
     return;
   }
+  let loggedInUser;
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (!user) {
         res.redirect("/new_account");
       } else {
-        bcrypt
-          .compare(req.body.password, user.password)
-          .then((isAuthenticaed) => {
-            if (isAuthenticaed) {
-              req.session.isLoggedIn = true;
-              req.session.email = req.body.email;
-              req.session.userName = user.name;
-              res.redirect("/");
-            } else {
-              res.redirect("/sign_in");
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+        loggedInUser = user;
+        return bcrypt.compare(req.body.password, loggedInUser.password);
+      }
+    })
+    .then((isAuthenticaed) => {
+      if (isAuthenticaed) {
+        req.session.isLoggedIn = true;
+        req.session.email = loggedInUser.email;
+        req.session.userName = loggedInUser.name;
+        res.redirect("/");
+      } else {
+        res.redirect("/sign_in");
       }
     })
     .catch((err) => {
-      console.error(err);
+      const error = new Error(err);
+      error.httpStatusCode = 500;
+      return next(error);
     });
 };

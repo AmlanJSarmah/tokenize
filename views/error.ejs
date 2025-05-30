@@ -31,7 +31,7 @@
         </ul>
         <% } %>
         <ul>
-          <li><a href="/" class="selected">Tokens</a></li>
+          <li><a href="/">Tokens</a></li>
           <li><a href="<%= isLoggedIn ? '/new' : '' %>">New Token</a></li>
           <li><a href="">My Token</a></li>
         </ul>
@@ -42,7 +42,11 @@
       <div class="token-container">
         <div class="token-text">
           <h2>Error</h2>
+          <% if(!serverError) { %>
           <p>Cannot Find Page :(</p>
+          <% } else{ %>
+          <p>Internal Server Error :(</p>
+          <% } %>
         </div>
       </div>
     </section>
