@@ -3,8 +3,9 @@ const User = require("../models/users");
 const Token = require("../models/token");
 
 // Controllers
-exports.allTokens = (req, res) => {
+exports.allTokens = (req, res, next) => {
   Token.find({ isAccepted: false })
+    .populate("creator")
     .then((tokens) => {
       res.render("main_page.ejs", {
         isLoggedIn: req.session.isLoggedIn,
@@ -29,7 +30,7 @@ exports.newToken = (req, res) => {
   });
 };
 
-exports.addNewToken = (req, res) => {
+exports.addNewToken = (req, res, next) => {
   if (!req.session.isLoggedIn) {
     res.redirect("/");
     return;
@@ -41,7 +42,6 @@ exports.addNewToken = (req, res) => {
         from: req.body.from,
         to: req.body.to,
         creator: user._id,
-        creatorName: user.name,
         accepter: null,
         isAccepted: false,
       });
@@ -49,5 +49,10 @@ exports.addNewToken = (req, res) => {
     })
     .then(() => {
       res.redirect("/");
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.statusCode = 500;
+      return next(error);
     });
 };

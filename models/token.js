@@ -18,10 +18,6 @@ const tokenSchema = new mongoose.Schema({
     ref: "User",
     required: true,
   },
-  creatorName: {
-    type: String,
-    required: true,
-  },
   accepter: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "User",
