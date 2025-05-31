@@ -15,6 +15,7 @@ const authRoutes = require("./routes/auth");
 // Controllers
 const errorController = require("./controllers/error");
 
+// Mounting Express
 const app = express();
 
 // Decoding Body
@@ -41,10 +42,17 @@ app.use(
 app.use(tokenRoutes);
 app.use(authRoutes);
 app.use(errorController.errorPage);
+app.use("/500", errorController.serverError);
 app.use((error, req, res, next) => {
-  res.redirect("/500");
+  console.error(error);
+  res.render("error.ejs", {
+    isLoggedIn: req.session.isLoggedIn,
+    userName: req.session.userName,
+    serverError: true,
+  });
 });
 
+// Connection Setup
 mongoose
   .connect("mongodb://localhost:27017/tokenize")
   .then(() => {

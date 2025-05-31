@@ -32,40 +32,26 @@
         <% } %>
         <ul>
           <li><a href="/" class="selected">Tokens</a></li>
-          <li><a href="<%= isLoggedIn ? '/new' : '' %>">New Token</a></li>
+          <li>
+            <a href="<%= isLoggedIn ? '/new' : '/sign_in' %>">New Token</a>
+          </li>
           <li><a href="">My Token</a></li>
         </ul>
       </div>
     </nav>
     <!-- MAIN Section -->
-    <!-- Token 1 -->
     <section class="main">
+      <!-- All Open Tokens -->
+      <% for(token of tokens){ %>
       <div class="token-container">
         <div class="token-text">
-          <h2>Collect My Amazon Parcel</h2>
-          <p><span>From : </span> Parcel Collection Area</p>
-          <p><span>To : </span> Boys Hostle Block 2</p>
+          <h2><%= token.name %> by <%= token.creatorName %></h2>
+          <p><span>From : </span> <%= token.from %></p>
+          <p><span>To : </span> <%= token.to %></p>
         </div>
-        <div class="token-claim"><button>Accept</button></div>
+        <div class="token-claim"><a href="/sign_in">Accept</a></div>
       </div>
-      <!-- Token 2 -->
-      <div class="token-container">
-        <div class="token-text">
-          <h2>Collect My Amazon Parcel</h2>
-          <p><span>From : </span> Parcel Collection Area</p>
-          <p><span>To : </span> Boys Hostle Block 2</p>
-        </div>
-        <div class="token-claim"><button>Accept</button></div>
-      </div>
-      <!-- Token 3 -->
-      <div class="token-container">
-        <div class="token-text">
-          <h2>Collect My Amazon Parcel</h2>
-          <p><span>From : </span> Parcel Collection Area</p>
-          <p><span>To : </span> Boys Hostle Block 2</p>
-        </div>
-        <div class="token-claim"><button>Accept</button></div>
-      </div>
+      <% } %>
     </section>
   </body>
 </html>

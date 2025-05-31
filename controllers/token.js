@@ -1,13 +1,27 @@
+// Models
+const User = require("../models/users");
+const Token = require("../models/token");
+
+// Controllers
 exports.allTokens = (req, res) => {
-  res.render("main_page.ejs", {
-    isLoggedIn: req.session.isLoggedIn,
-    userName: req.session.userName,
-  });
+  Token.find({ isAccepted: false })
+    .then((tokens) => {
+      res.render("main_page.ejs", {
+        isLoggedIn: req.session.isLoggedIn,
+        userName: req.session.userName,
+        tokens: tokens,
+      });
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.statusCode = 500;
+      return next(error);
+    });
 };
 
 exports.newToken = (req, res) => {
   if (!req.session.isLoggedIn) {
-    res.redirect("/");
+    res.redirect("/sign_in");
     return;
   }
   res.render("new_token.ejs", {
@@ -16,5 +30,24 @@ exports.newToken = (req, res) => {
 };
 
 exports.addNewToken = (req, res) => {
-  res.redirect("/");
+  if (!req.session.isLoggedIn) {
+    res.redirect("/");
+    return;
+  }
+  User.findOne({ email: req.session.email })
+    .then((user) => {
+      const token = new Token({
+        name: req.body.name,
+        from: req.body.from,
+        to: req.body.to,
+        creator: user._id,
+        creatorName: user.name,
+        accepter: null,
+        isAccepted: false,
+      });
+      return token.save();
+    })
+    .then(() => {
+      res.redirect("/");
+    });
 };

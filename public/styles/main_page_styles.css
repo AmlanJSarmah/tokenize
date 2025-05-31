@@ -36,6 +36,17 @@
   align-items: flex-end;
 }
 
+.token-claim a {
+  background-color: var(--accent-color);
+  color: white;
+  padding: 1rem;
+  border-radius: 2.5rem;
+  font-size: var(--token-button);
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
 @media screen and (max-width: 540px) {
   .token-container {
     width: 95%;
