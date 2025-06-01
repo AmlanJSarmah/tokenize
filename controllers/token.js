@@ -1,7 +1,6 @@
 // Models
 const User = require("../models/users");
 const Token = require("../models/token");
-const token = require("../models/token");
 
 // Controllers
 exports.allTokens = (req, res, next) => {
@@ -51,12 +50,6 @@ exports.addNewToken = (req, res, next) => {
       return token.save();
     })
     .then(() => {
-      return loggedInUser.addToken(token._id, true);
-    })
-    .then(() => {
-      return loggedInUser.addToken(token._id, false);
-    })
-    .then(() => {
       res.redirect("/");
     })
     .catch((err) => {
@@ -71,15 +64,30 @@ exports.myTokens = (req, res, next) => {
     res.redirect("/");
     return;
   }
+  let loggedInUser;
+  let generatedTokens;
+  let acceptedTokens;
   User.findOne({ email: req.session.email })
-    .populate("generatedTokens")
-    .populate("acceptedTokens")
     .then((user) => {
+      loggedInUser = user;
+      return Token.find({ creator: loggedInUser._id });
+    })
+    .then((tokens) => {
+      generatedTokens = tokens;
+      return Token.find({ accepter: loggedInUser._id });
+    })
+    .then((tokens) => {
+      acceptedTokens = tokens;
       res.render("my_tokens", {
         isLoggedIn: req.session.isLoggedIn,
         userName: req.session.userName,
-        generatedTokens: user.generatedTokens,
-        acceptedTokens: user.acceptedTokens,
+        generatedTokens: generatedTokens,
+        acceptedTokens: acceptedTokens,
       });
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.statusCode = 500;
+      return next(error);
     });
 };
