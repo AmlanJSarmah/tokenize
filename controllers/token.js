@@ -1,6 +1,7 @@
 // Models
 const User = require("../models/users");
 const Token = require("../models/token");
+const token = require("../models/token");
 
 // Controllers
 exports.allTokens = (req, res, next) => {
@@ -35,9 +36,11 @@ exports.addNewToken = (req, res, next) => {
     res.redirect("/");
     return;
   }
+  let loggedInUser, token;
   User.findOne({ email: req.session.email })
     .then((user) => {
-      const token = new Token({
+      loggedInUser = user;
+      token = new Token({
         name: req.body.name,
         from: req.body.from,
         to: req.body.to,
@@ -46,6 +49,9 @@ exports.addNewToken = (req, res, next) => {
         isAccepted: false,
       });
       return token.save();
+    })
+    .then(() => {
+      return loggedInUser.addToken(token._id, true);
     })
     .then(() => {
       res.redirect("/");

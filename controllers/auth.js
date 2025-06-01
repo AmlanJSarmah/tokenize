@@ -26,7 +26,7 @@ exports.loadSignIn = (req, res) => {
   });
 };
 
-exports.signUp = (req, res) => {
+exports.signUp = (req, res, next) => {
   if (req.session.isLoggedIn) {
     res.redirect("/");
     return;
@@ -57,7 +57,7 @@ exports.signUp = (req, res) => {
     });
 };
 
-exports.logIn = (req, res) => {
+exports.logIn = (req, res, next) => {
   if (req.session.isLoggedIn) {
     res.redirect("/");
     return;
