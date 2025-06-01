@@ -35,7 +35,7 @@ exports.addNewToken = (req, res, next) => {
     res.redirect("/");
     return;
   }
-  let loggedInUser, token;
+  let token;
   User.findOne({ email: req.session.email })
     .then((user) => {
       loggedInUser = user;
@@ -84,6 +84,23 @@ exports.myTokens = (req, res, next) => {
         generatedTokens: generatedTokens,
         acceptedTokens: acceptedTokens,
       });
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.statusCode = 500;
+      return next(error);
+    });
+};
+
+exports.deleteToken = (req, res, next) => {
+  if (!req.session.isLoggedIn) {
+    res.redirect("/sign_in");
+    return;
+  }
+  const tokenId = req.params.tokenId.split(":")[1];
+  Token.deleteOne({ _id: tokenId })
+    .then(() => {
+      res.redirect("/my_tokens");
     })
     .catch((err) => {
       const error = new Error(err);

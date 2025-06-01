@@ -47,6 +47,14 @@
     </nav>
     <!-- MAIN Section -->
     <section class="main">
+      <% if (generatedTokens.length == 0 && acceptedTokens.length == 0) { %>
+      <div class="token-container">
+        <div class="token-text">
+          <h2>No Tokens Yet :(( </h2>
+        </div>
+        <div class="token-claim"><a href="/new">Create</a></div>
+      </div>
+      <% } %>
       <% for(token of generatedTokens){ %>
       <div class="token-container">
         <div class="token-text">
@@ -58,7 +66,7 @@
         <% if(token.isAccepted) { %>
         <div class="token-claim"><a href="/">Connect</a></div>
         <% } %>
-        <div class="token-claim"><a href="/">Delete</a></div>
+        <div class="token-claim"><a href="/delete:<%= token._id %>">Delete</a></div>
       </div>
       <% } %> <% for(token of acceptedTokens){ %>
       <div class="token-container">

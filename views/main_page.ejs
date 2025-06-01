@@ -44,7 +44,15 @@
     <!-- MAIN Section -->
     <section class="main">
       <!-- All Open Tokens -->
-      <% for(token of tokens){ %>
+      <% if (tokens.length == 0) { %>
+      <div class="token-container">
+        <div class="token-text">
+          <h2>No Tokens Yet :((</h2>
+          <p><span>Be the first one to create one :))</span></p>
+        </div>
+        <div class="token-claim"><a href="/new">Create</a></div>
+      </div>
+      <% } %> <% for(token of tokens){ %>
       <div class="token-container">
         <div class="token-text">
           <h2><%= token.name %> by <%= token.creator.name %></h2>
