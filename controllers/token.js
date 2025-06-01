@@ -54,11 +54,32 @@ exports.addNewToken = (req, res, next) => {
       return loggedInUser.addToken(token._id, true);
     })
     .then(() => {
+      return loggedInUser.addToken(token._id, false);
+    })
+    .then(() => {
       res.redirect("/");
     })
     .catch((err) => {
       const error = new Error(err);
       error.statusCode = 500;
       return next(error);
+    });
+};
+
+exports.myTokens = (req, res, next) => {
+  if (!req.session.isLoggedIn) {
+    res.redirect("/");
+    return;
+  }
+  User.findOne({ email: req.session.email })
+    .populate("generatedTokens")
+    .populate("acceptedTokens")
+    .then((user) => {
+      res.render("my_tokens", {
+        isLoggedIn: req.session.isLoggedIn,
+        userName: req.session.userName,
+        generatedTokens: user.generatedTokens,
+        acceptedTokens: user.acceptedTokens,
+      });
     });
 };

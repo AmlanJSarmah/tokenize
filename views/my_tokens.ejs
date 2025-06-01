@@ -36,23 +36,41 @@
             <a href="<%= isLoggedIn ? '/new' : '/sign_in' %>">New Token</a>
           </li>
           <li>
-            <a href="<%= isLoggedIn ? '/my_tokens' : '/sign_in' %>">My Token</a>
+            <a
+              href="<%= isLoggedIn ? '/my_tokens' : '/sign_in' %>"
+              class="selected"
+              >My Token</a
+            >
           </li>
         </ul>
       </div>
     </nav>
-    <!-- Error -->
+    <!-- MAIN Section -->
     <section class="main">
+      <% for(token of generatedTokens){ %>
       <div class="token-container">
         <div class="token-text">
-          <h2>Error</h2>
-          <% if(!serverError) { %>
-          <p>Cannot Find Page :(</p>
-          <% } else{ %>
-          <p>Internal Server Error :(</p>
-          <% } %>
+          <h2><%= token.name %> by <%= token.creator.name %></h2>
+          <p><span>From : </span> <%= token.from %></p>
+          <p><span>To : </span> <%= token.to %></p>
+          <h2>Status : <%= token.isAccepted ? "Accepted" : "Not Accepted Yet" %></h2>
         </div>
+        <% if(token.isAccepted) { %>
+        <div class="token-claim"><a href="/">Connect</a></div>
+        <% } %>
+        <div class="token-claim"><a href="/">Delete</a></div>
       </div>
+      <% } %> <% for(token of acceptedTokens){ %>
+      <div class="token-container">
+        <div class="token-text">
+          <h2><%= token.name %> by <%= token.creator.name %></h2>
+          <p><span>From : </span> <%= token.from %></p>
+          <p><span>To : </span> <%= token.to %></p>
+          <h2>Status : Accepted By You </h2>
+        </h2>
+        <div class="token-claim"><a href="/">Connect</a></div>
+      </div>
+      <% } %>
     </section>
   </body>
 </html>

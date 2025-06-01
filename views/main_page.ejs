@@ -35,7 +35,9 @@
           <li>
             <a href="<%= isLoggedIn ? '/new' : '/sign_in' %>">New Token</a>
           </li>
-          <li><a href="">My Token</a></li>
+          <li>
+            <a href="<%= isLoggedIn ? '/my_tokens' : '/sign_in' %>">My Token</a>
+          </li>
         </ul>
       </div>
     </nav>
@@ -49,7 +51,7 @@
           <p><span>From : </span> <%= token.from %></p>
           <p><span>To : </span> <%= token.to %></p>
         </div>
-        <div class="token-claim"><a href="/sign_in">Accept</a></div>
+        <div class="token-claim"><a href="/">Accept</a></div>
       </div>
       <% } %>
     </section>
