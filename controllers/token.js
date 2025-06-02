@@ -70,7 +70,7 @@ exports.myTokens = (req, res, next) => {
   User.findOne({ email: req.session.email })
     .then((user) => {
       loggedInUser = user;
-      return Token.find({ creator: loggedInUser._id });
+      return Token.find({ creator: loggedInUser._id }).populate("accepter");
     })
     .then((tokens) => {
       generatedTokens = tokens;
@@ -101,6 +101,42 @@ exports.deleteToken = (req, res, next) => {
   Token.deleteOne({ _id: tokenId })
     .then(() => {
       res.redirect("/my_tokens");
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.statusCode = 500;
+      return next(error);
+    });
+};
+
+exports.acceptToken = (req, res, next) => {
+  if (!req.session.isLoggedIn) {
+    res.redirect("/sign_in");
+    return;
+  }
+  const tokenId = req.params.tokenId.split(":")[1];
+  let loggedInUser;
+  User.findOne({ email: req.session.email })
+    .then((user) => {
+      loggedInUser = user;
+      return Token.findOne({ _id: tokenId });
+    })
+    .then((token) => {
+      if (loggedInUser._id.equals(token.creator)) {
+        res.redirect("/");
+      } else {
+        token.accepter = loggedInUser;
+        token.isAccepted = true;
+        Token.findByIdAndUpdate(token._id, { $set: token })
+          .then(() => {
+            res.redirect("/my_tokens");
+          })
+          .catch((err) => {
+            const error = new Error(err);
+            error.statusCode = 500;
+            return next(error);
+          });
+      }
     })
     .catch((err) => {
       const error = new Error(err);

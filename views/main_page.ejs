@@ -47,8 +47,8 @@
       <% if (tokens.length == 0) { %>
       <div class="token-container">
         <div class="token-text">
-          <h2>No Tokens Yet :((</h2>
-          <p><span>Be the first one to create one :))</span></p>
+          <h2>No Tokens Yet :(</h2>
+          <p><span>Be the first one to create one</span></p>
         </div>
         <div class="token-claim"><a href="/new">Create</a></div>
       </div>
@@ -59,7 +59,9 @@
           <p><span>From : </span> <%= token.from %></p>
           <p><span>To : </span> <%= token.to %></p>
         </div>
-        <div class="token-claim"><a href="/">Accept</a></div>
+        <div class="token-claim">
+          <a href="/accept:<%= token._id %>">Accept</a>
+        </div>
       </div>
       <% } %>
     </section>

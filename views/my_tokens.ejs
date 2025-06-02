@@ -50,7 +50,7 @@
       <% if (generatedTokens.length == 0 && acceptedTokens.length == 0) { %>
       <div class="token-container">
         <div class="token-text">
-          <h2>No Tokens Yet :(( </h2>
+          <h2>No Tokens Yet :( </h2>
         </div>
         <div class="token-claim"><a href="/new">Create</a></div>
       </div>
@@ -61,12 +61,14 @@
           <h2><%= token.name %> by <%= userName %></h2>
           <p><span>From : </span> <%= token.from %></p>
           <p><span>To : </span> <%= token.to %></p>
-          <h2>Status : <%= token.isAccepted ? "Accepted" : "Not Accepted Yet" %></h2>
+          <h2>Status : <%= token.isAccepted ? `Accepted by ${token.accepter.name}` : "Not Accepted Yet" %></h2>
+          <div class="token-claim">
+            <a href="/delete:<%= token._id %>">Delete</a>
+            <% if(token.isAccepted) { %>
+            <a href="/">Connect</a>
+            <% } %>
+          </div>
         </div>
-        <% if(token.isAccepted) { %>
-        <div class="token-claim"><a href="/">Connect</a></div>
-        <% } %>
-        <div class="token-claim"><a href="/delete:<%= token._id %>">Delete</a></div>
       </div>
       <% } %> <% for(token of acceptedTokens){ %>
       <div class="token-container">

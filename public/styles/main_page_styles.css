@@ -33,18 +33,19 @@
 
 .token-claim {
   display: flex;
-  align-items: flex-end;
+  align-items: center;
 }
 
 .token-claim a {
   background-color: var(--accent-color);
   color: white;
-  padding: 1rem;
+  padding: 1.5rem;
   border-radius: 2.5rem;
   font-size: var(--token-button);
   border: none;
   outline: none;
   cursor: pointer;
+  margin-right: 1rem;
 }
 
 @media screen and (max-width: 540px) {
@@ -58,5 +59,12 @@
   .token-text {
     margin-bottom: 2rem;
     text-align: center;
+  }
+  .token-claim {
+    flex-direction: column;
+  }
+  .token-claim a {
+    margin-right: 0rem;
+    margin-top: 1rem;
   }
 }
