@@ -74,7 +74,7 @@ exports.myTokens = (req, res, next) => {
     })
     .then((tokens) => {
       generatedTokens = tokens;
-      return Token.find({ accepter: loggedInUser._id });
+      return Token.find({ accepter: loggedInUser._id }).populate("creator");
     })
     .then((tokens) => {
       acceptedTokens = tokens;
