@@ -62,7 +62,9 @@
           <p><span>From : </span> <%= token.from %></p>
           <p><span>To : </span> <%= token.to %></p>
           <p><span>Status : </span> <%= token.isAccepted ? `Accepted by ${token.accepter.name}` : "Not Accepted Yet" %></p>
+          <% if(token.isAccepted) { %>
           <p><span>Connect at: </span><%= token.accepter.email %></p>
+          <% } %>
           <div class="token-claim">
             <a href="/delete:<%= token._id %>">Delete</a>
           </div>

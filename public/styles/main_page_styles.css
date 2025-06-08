@@ -4,7 +4,6 @@
   flex-direction: column;
   align-items: center;
   background-color: var(--main-bg);
-  user-select: none;
 }
 
 .token-container {
