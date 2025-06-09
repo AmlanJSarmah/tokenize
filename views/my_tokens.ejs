@@ -1,84 +1,86 @@
 <%- include('includes/head') %>
-  <!-- NAV -->
-  <nav class="nav-bar">
-    <div class="nav-container">
-      <% if(isLoggedIn) { %>
-        <h1>
-          <%= userName %>
-        </h1>
-        <% } else { %>
-          <ul>
-            <li>
-              <a href="/new_account">Sign Up / Log In</a>
-            </li>
-          </ul>
-          <% } %>
-            <ul>
-              <li><a href="/">Tokens</a></li>
-              <li>
-                <a href="<%= isLoggedIn ? '/new' : '/sign_in' %>">New Token</a>
-              </li>
-              <li>
-                <a href="<%= isLoggedIn ? '/my_tokens' : '/sign_in' %>" class="selected">My Token</a>
-              </li>
-            </ul>
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-container">
+    <% if(isLoggedIn) { %>
+    <h1><%= userName %></h1>
+    <% } else { %>
+    <ul>
+      <li>
+        <a href="/new_account">Sign Up / Log In</a>
+      </li>
+    </ul>
+    <% } %>
+    <ul>
+      <li><a href="/">Tokens</a></li>
+      <li>
+        <a href="<%= isLoggedIn ? '/new' : '/sign_in' %>">New Token</a>
+      </li>
+      <li>
+        <a href="<%= isLoggedIn ? '/my_tokens' : '/sign_in' %>" class="selected"
+          >My Token</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- MAIN Section -->
+<section class="main">
+  <% if (generatedTokens.length==0 && acceptedTokens.length==0) { %>
+  <div class="token-container">
+    <div class="token-text">
+      <h2>No Tokens Yet :(</h2>
     </div>
-  </nav>
-  <!-- MAIN Section -->
-  <section class="main">
-    <% if (generatedTokens.length==0 && acceptedTokens.length==0) { %>
-      <div class="token-container">
-        <div class="token-text">
-          <h2>No Tokens Yet :( </h2>
-        </div>
-        <div class="token-claim"><a href="/new">Create</a></div>
-      </div>
+    <div class="token-claim"><a href="/new">Create</a></div>
+  </div>
+  <% } %> <% for(token of generatedTokens){ %>
+  <div class="token-container">
+    <div class="token-text">
+      <h2><%= token.name %> by <%= userName %></h2>
+      <p>
+        <span>From : </span>
+        <%= token.from %>
+      </p>
+      <p>
+        <span>To : </span>
+        <%= token.to %>
+      </p>
+      <p>
+        <span>Status : </span>
+        <%= token.isAccepted ? `Accepted by ${token.accepter.name}` : "Not
+        Accepted Yet" %>
+      </p>
+      <% if(token.isAccepted) { %>
+      <p>
+        <span>Connect at: </span>
+        <%= token.accepter.email %>
+      </p>
       <% } %>
-        <% for(token of generatedTokens){ %>
-          <div class="token-container">
-            <div class="token-text">
-              <h2>
-                <%= token.name %> by <%= userName %>
-              </h2>
-              <p><span>From : </span>
-                <%= token.from %>
-              </p>
-              <p><span>To : </span>
-                <%= token.to %>
-              </p>
-              <p><span>Status : </span>
-                <%= token.isAccepted ? `Accepted by ${token.accepter.name}` : "Not Accepted Yet" %>
-              </p>
-              <% if(token.isAccepted) { %>
-                <p><span>Connect at: </span>
-                  <%= token.accepter.email %>
-                </p>
-                <% } %>
-                  <div class="token-claim">
-                    <a href="/delete:<%= token._id %>">Delete</a>
-                  </div>
-            </div>
-          </div>
-          <% } %>
-            <% for(token of acceptedTokens){ %>
-              <div class="token-container">
-                <div class="token-text">
-                  <h2>
-                    <%= token.name %> by <%= token.creator.name %>
-                  </h2>
-                  <p><span>From : </span>
-                    <%= token.from %>
-                  </p>
-                  <p><span>To : </span>
-                    <%= token.to %>
-                  </p>
-                  <p><span>Status : </span>Accepted By You </p>
-                  <p><span>Connect at : </span>
-                    <%= token.creator.email %>
-                  </p>
-                  </h2>
-                  <div class="token-claim"><a href="/my_tokens">Revoke</a></div>
-                </div>
-                <% } %>
-  </section>
-  <%- include('includes/tail') %>
+      <div class="token-claim">
+        <a href="/delete:<%= token._id %>">Delete</a>
+      </div>
+    </div>
+  </div>
+  <% } %> <% for(token of acceptedTokens){ %>
+  <div class="token-container">
+    <div class="token-text">
+      <h2><%= token.name %> by <%= token.creator.name %></h2>
+      <p>
+        <span>From : </span>
+        <%= token.from %>
+      </p>
+      <p>
+        <span>To : </span>
+        <%= token.to %>
+      </p>
+      <p><span>Status : </span>Accepted By You</p>
+      <p>
+        <span>Connect at : </span>
+        <%= token.creator.email %>
+      </p>
+      <div class="token-claim"><a href="/my_tokens">Revoke</a></div>
+    </div>
+  </div>
+  <% } %>
+</section>
+<%- include('includes/tail') %>
