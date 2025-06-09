@@ -1,58 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tokenize</title>
-    <!-- FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Babylonica&family=Poppins:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- STYLESHEET -->
-    <!-- Global -->
-    <link rel="stylesheet" href="/styles/styles.css" />
-    <!-- Main Page -->
-    <link rel="stylesheet" href="/styles/main_page_styles.css" />
-  </head>
-  <body>
-    <!-- NAV -->
-    <nav class="nav-bar">
-      <div class="nav-container">
-        <% if(isLoggedIn) { %>
-        <h1><%= userName %></h1>
-        <% } else { %>
-        <ul>
-          <li>
-            <a href="/new_account">Sign Up / Log In</a>
-          </li>
-        </ul>
-        <% } %>
-        <ul>
-          <li><a href="/">Tokens</a></li>
-          <li>
-            <a href="<%= isLoggedIn ? '/new' : '/sign_in' %>">New Token</a>
-          </li>
-          <li>
-            <a href="<%= isLoggedIn ? '/my_tokens' : '/sign_in' %>">My Token</a>
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <!-- Error -->
-    <section class="main">
-      <div class="token-container">
-        <div class="token-text">
-          <h2>Error</h2>
-          <% if(!serverError) { %>
-          <p>Cannot Find Page :(</p>
-          <% } else{ %>
-          <p>Internal Server Error :(</p>
-          <% } %>
-        </div>
-      </div>
-    </section>
-  </body>
-</html>
+<%- include('includes/head') %>
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-container">
+    <% if(isLoggedIn) { %>
+    <h1><%= userName %></h1>
+    <% } else { %>
+    <ul>
+      <li>
+        <a href="/new_account">Sign Up / Log In</a>
+      </li>
+    </ul>
+    <% } %>
+    <ul>
+      <li><a href="/">Tokens</a></li>
+      <li>
+        <a href="<%= isLoggedIn ? '/new' : '/sign_in' %>">New Token</a>
+      </li>
+      <li>
+        <a href="<%= isLoggedIn ? '/my_tokens' : '/sign_in' %>">My Token</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- Error -->
+<section class="main">
+  <div class="token-container">
+    <div class="token-text">
+      <h2>Error</h2>
+      <% if(!serverError) { %>
+      <p>Cannot Find Page :(</p>
+      <% } else{ %>
+      <p>Internal Server Error :(</p>
+      <% } %>
+    </div>
+  </div>
+</section>
+<%- include('includes/tail') %>

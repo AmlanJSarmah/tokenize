@@ -1,49 +1,29 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tokenize</title>
-    <!-- FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Babylonica&family=Poppins:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- STYLESHEET -->
-    <!-- Global -->
-    <link rel="stylesheet" href="/styles/styles.css" />
-    <!-- New Token Page -->
-    <link rel="stylesheet" href="/styles/new_token.css" />
-  </head>
-  <body>
-    <!-- NAV -->
-    <nav class="nav-bar">
-      <div class="nav-container">
-        <h1><%= userName %></h1>
-        <ul>
-          <li><a href="/">Tokens</a></li>
-          <li>
-            <a href="/new" class="selected">New Token</a>
-          </li>
-          <li><a href="/my_tokens">My Token</a></li>
-        </ul>
-      </div>
-    </nav>
-    <!-- NEW TOKEN Section -->
-    <section class="new-token">
-      <div class="form-container">
-        <form action="/new" method="POST">
-          <label for="name">Task</label>
-          <input type="text" name="name" />
-          <label for="from">From</label>
-          <input type="text" name="from" />
-          <label for="to">To</label>
-          <input type="text" name="to" />
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </section>
-  </body>
-</html>
+<%- include('includes/head') %>
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-container">
+    <h1><%= userName %></h1>
+    <ul>
+      <li><a href="/">Tokens</a></li>
+      <li>
+        <a href="/new" class="selected">New Token</a>
+      </li>
+      <li><a href="/my_tokens">My Token</a></li>
+    </ul>
+  </div>
+</nav>
+<!-- NEW TOKEN Section -->
+<section class="new-token">
+  <div class="form-container">
+    <form action="/new" method="POST">
+      <label for="name">Task</label>
+      <input type="text" name="name" />
+      <label for="from">From</label>
+      <input type="text" name="from" />
+      <label for="to">To</label>
+      <input type="text" name="to" />
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</section>
+<%- include('includes/tail') %>

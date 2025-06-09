@@ -1,67 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tokenize</title>
-    <!-- FONTS -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Babylonica&family=Poppins:wght@400;700&display=swap"
-      rel="stylesheet"
-    />
-    <!-- STYLESHEET -->
-    <!-- Global -->
-    <link rel="stylesheet" href="/styles/styles.css" />
-    <!-- New Token Page -->
-    <link rel="stylesheet" href="/styles/new_token.css" />
-  </head>
-  <body>
-    <!-- NAV -->
-    <nav class="nav-bar">
-      <div class="nav-container">
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li>
-            <a href="/new_account" class="<%= signUpMode ? 'selected' : '' %>"
-              >Create Account</a
-            >
-          </li>
-          <li>
-            <a href="/sign_in" class="<%= !signUpMode ? 'selected' : '' %>"
-              >Sign In</a
-            >
-          </li>
-        </ul>
-      </div>
-    </nav>
-    <!-- NEW TOKEN Section -->
-    <section class="new-token">
-      <div class="form-container">
-        <form
-          action="<%= signUpMode ? '/new_account' : '/sign_in' %>"
-          method="POST"
-          id="submitAccountDetails"
+<%- include('includes/head') %>
+<!-- NAV -->
+<nav class="nav-bar">
+  <div class="nav-container">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li>
+        <a href="/new_account" class="<%= signUpMode ? 'selected' : '' %>"
+          >Create Account</a
         >
-          <% if(signUpMode){ %>
-          <label for="userName">Username</label>
-          <input type="text" name="userName" />
-          <% } %>
-          <label for="email">Email</label>
-          <input type="text" name="email" />
-          <label for="password">Password</label>
-          <input type="text" name="password" id="password" />
-          <% if(signUpMode){ %>
-          <label for="confirmPassword">Confirm Password</label>
-          <input type="text" name="confirmPassword" id="confirmPassword" />
-          <% } %>
-          <button type="submit">Submit</button>
-        </form>
-      </div>
-    </section>
-    <% if(signUpMode) { %>
-    <script src="/js/signUpScript.js"></script>
-    <% } %>
-  </body>
-</html>
+      </li>
+      <li>
+        <a href="/sign_in" class="<%= !signUpMode ? 'selected' : '' %>"
+          >Sign In</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- NEW TOKEN Section -->
+<section class="new-token">
+  <div class="form-container">
+    <form
+      action="<%= signUpMode ? '/new_account' : '/sign_in' %>"
+      method="POST"
+      id="submitAccountDetails"
+    >
+      <% if(signUpMode){ %>
+      <label for="userName">Username</label>
+      <input type="text" name="userName" />
+      <% } %>
+      <label for="email">Email</label>
+      <input type="text" name="email" />
+      <label for="password">Password</label>
+      <input type="text" name="password" id="password" />
+      <% if(signUpMode){ %>
+      <label for="confirmPassword">Confirm Password</label>
+      <input type="text" name="confirmPassword" id="confirmPassword" />
+      <% } %>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</section>
+<% if(signUpMode) { %>
+<script src="/js/signUpScript.js"></script>
+<% } %> <%- include('includes/tail') %>
