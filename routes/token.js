@@ -11,5 +11,6 @@ router.post("/new", tokenController.addNewToken);
 router.get("/my_tokens", tokenController.myTokens);
 router.get("/delete:tokenId", tokenController.deleteToken);
 router.get("/accept:tokenId", tokenController.acceptToken);
+router.get("/revoke:tokenId", tokenController.revokeToken);
 
 module.exports = router;

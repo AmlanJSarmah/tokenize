@@ -78,6 +78,7 @@ exports.myTokens = (req, res, next) => {
     })
     .then((tokens) => {
       acceptedTokens = tokens;
+      console.log(generatedTokens, acceptedTokens);
       res.render("my_tokens", {
         isLoggedIn: req.session.isLoggedIn,
         userName: req.session.userName,
@@ -137,6 +138,24 @@ exports.acceptToken = (req, res, next) => {
             return next(error);
           });
       }
+    })
+    .catch((err) => {
+      const error = new Error(err);
+      error.statusCode = 500;
+      return next(error);
+    });
+};
+
+exports.revokeToken = (req, res, next) => {
+  const tokenId = req.params.tokenId.split(":")[1];
+  Token.findOne({ _id: tokenId })
+    .then((token) => {
+      token.accepter = null;
+      token.isAccepted = false;
+      return Token.findByIdAndUpdate(token._id, { $set: token });
+    })
+    .then(() => {
+      res.redirect("/");
     })
     .catch((err) => {
       const error = new Error(err);

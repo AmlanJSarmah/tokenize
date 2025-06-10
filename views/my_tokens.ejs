@@ -47,8 +47,8 @@
       </p>
       <p>
         <span>Status : </span>
-        <%= token.isAccepted ? `Accepted by ${token.accepter.name}` : "Not
-        Accepted Yet" %>
+        <%= token.isAccepted ? `Accepted by ${token.accepter.name}` : `Not
+        Accepted Yet` %>
       </p>
       <% if(token.isAccepted) { %>
       <p>
@@ -78,7 +78,9 @@
         <span>Connect at : </span>
         <%= token.creator.email %>
       </p>
-      <div class="token-claim"><a href="/my_tokens">Revoke</a></div>
+      <div class="token-claim">
+        <a href="/revoke:<%= token._id %>">Revoke</a>
+      </div>
     </div>
   </div>
   <% } %>
