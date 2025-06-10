@@ -78,7 +78,6 @@ exports.myTokens = (req, res, next) => {
     })
     .then((tokens) => {
       acceptedTokens = tokens;
-      console.log(generatedTokens, acceptedTokens);
       res.render("my_tokens", {
         isLoggedIn: req.session.isLoggedIn,
         userName: req.session.userName,
